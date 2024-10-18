@@ -8,7 +8,7 @@ using namespace std;
 
 class Residential{
 
-        int getCityPollution();
+        
 		
 
 
