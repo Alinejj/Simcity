@@ -75,8 +75,8 @@ void City::PrintCity()
 {
 	// Access and print the elements of the 2D vector
     for (const auto& row : cityGrid) {
-        for (const auto& elem : row) {
-            elem->printCell();
+        for (const auto& cell : row) {
+            cell->printCell();
         }
         cout << endl;
     }
