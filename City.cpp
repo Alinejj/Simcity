@@ -5,8 +5,11 @@
 #include <vector>
 #include "Cell.h"
 #include "City.h"
+#include "residential.h"
 
 using namespace std;
+
+
 
 //read in and initialize the city file
 
@@ -25,10 +28,15 @@ void City::ReadInAndInitialize(string filename)
         getline(configFile, region);
         getline(configFile, time);
         getline(configFile, refresh);
+
+        
+
         configFile.close();
 
         //extract the csv file name 
         string csvFileName = region.substr(region.find (":") + 1);
+        
+        
         
         //open and read the csv file
         ifstream csvFile(csvFileName);
@@ -73,13 +81,82 @@ void City::ReadInAndInitialize(string filename)
 
 void City::PrintCity()
 {
+    /*
 	// Access and print the elements of the 2D vector
     for (const auto& row : cityGrid) {
         for (const auto& cell : row) {
             cell->printCell();
         }
         cout << endl;
+    }*/
+
+   for (const auto& row : cityGrid) {
+        for (const auto& cell : row) {
+            if (cell) {
+                cell->printCell();
+            } else {
+                cout << "- "; // Empty cell
+            }
+        }
+        cout << endl;
     }
 
 
 }
+
+int City::countAdjPop(int i, int j){
+    int popCount = 0;
+
+    int rows[] = {-1, 1, 0 , 0};
+    int cols[] = {0, 0, -1, 1};
+
+    for(int k = 0; k < 4; k++){
+        int newRow = i + rows[k];
+        int newCol = j + cols[k];
+
+        //check if new pos is in bounds
+        if(newRow >= 0 && newRow < cityGrid.size() && newCol >= 0 && newCol < cityGrid[0].size()){
+            Cell* neighbor = cityGrid[newRow][newCol];
+            if(neighbor->getCellPollution() >= 1){
+                popCount++;
+            }
+        }
+    }
+    return popCount;
+}
+
+bool City::isAdjPowerline(int i, int j){
+    int rows[] = {-1, 1, 0 , 0};
+    int cols[] = {0, 0, -1, 1};
+
+
+    for(int k = 0; k < 4; k++){
+        int newRow = i + rows[k];
+        int newCol = j + cols[k];
+
+        //check if new pos is in bounds
+        if(newRow >= 0 && newRow < cityGrid.size() && newCol >= 0 && newCol < cityGrid[0].size()){
+            Cell* neighbor = cityGrid[newRow][newCol];
+
+            if(neighbor->isPowerline()){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+void City::updateResidentialCells(){
+    for(int i =0; i<cityGrid.size(); i++){
+        for(int j = 0; j < cityGrid[i].size(); j++){
+            if(cityGrid[i][j]->getCellType() == "R"){
+                Residential* residentialCell = dynamic_cast<Residential*>(cityGrid[i][j]);
+                if (residentialCell) {
+                    residentialCell->growPopulation(*this, i, j, residentialCell);
+                }
+            }
+        }
+    }
+}
+
+

@@ -40,7 +40,7 @@ Cell::Cell(string type){
 
 //OTHER
 void Cell::printCell(){
-	if(cellPopulation == 0 && (cellType=="R" || cellType == "I" || cellType =="C"))
+	/*if(cellPopulation == 0 && (cellType=="R" || cellType == "I" || cellType =="C"))
 	{
 		cout << cellType << " ";
 	}
@@ -51,5 +51,29 @@ void Cell::printCell(){
 	else
 	{
 		cout << cellType << " ";
-	}
+	}*/
+
+	if (cellType == "R") { 
+        if (cellPopulation > 0) {
+            cout << cellPopulation << " "; 
+        } else {
+            cout << "R "; 
+        }
+    } else if (cellType == "I" || cellType == "C") { 
+        if (cellPopulation == 0) {
+            cout << cellType << " "; 
+        } else {
+            cout << cellPopulation << " "; 
+        }
+    } else {
+        cout << cellType << " "; 
+    }
+}
+
+bool Cell::isPowerline(){
+	return cellType == "P";
+}
+
+char Cell::display() const{
+	return cellType[0];
 }
