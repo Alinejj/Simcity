@@ -35,7 +35,8 @@ void City::ReadInAndInitialize(string filename)
 
         //extract the csv file name 
         string csvFileName = region.substr(region.find (":") + 1);
-        
+        timeLimit = stoi(time.substr(time.find(":") + 1));
+        refreshRate = stoi(refresh.substr(refresh.find(":") + 1));
         
         
         //open and read the csv file
@@ -81,22 +82,11 @@ void City::ReadInAndInitialize(string filename)
 
 void City::PrintCity()
 {
-    /*
+    
 	// Access and print the elements of the 2D vector
     for (const auto& row : cityGrid) {
         for (const auto& cell : row) {
-            cell->printCell();
-        }
-        cout << endl;
-    }*/
-
-   for (const auto& row : cityGrid) {
-        for (const auto& cell : row) {
-            if (cell) {
-                cell->printCell();
-            } else {
-                cout << "- "; // Empty cell
-            }
+            cout<<cell->display()<<" ";
         }
         cout << endl;
     }

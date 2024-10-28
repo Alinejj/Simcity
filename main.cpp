@@ -7,44 +7,52 @@
 #include "City.h"
 #include "residential.h"
 
-
 using namespace std;
 
 City city;
-int main(){
-    
 
+int main() {
     string filename;
+
+    // Prompt user to enter configuration filename
     cout << "Enter the filename for the configuration: ";
     getline(cin, filename);
-	city.ReadInAndInitialize(filename);
-	city.PrintCity();
 
+    // Initialize city with configuration file data, including refresh rate and time limit
+    city.ReadInAndInitialize(filename);
 
+    // Access refresh rate and time limit from the city object
+    int refreshRate = city.refreshRate;
+    int timeLimit = city.timeLimit;
+    
+    city.PrintCity();  // Initial display of city layout
+
+    int updateCount = 0;
     bool updated = true;
 
-    while(updated){
-        cout<<"\nSimulation of Residential Cells...\n";
+    // Main loop, runs until no updates or until time limit is reached
+    while (updated && updateCount < timeLimit) {
+        updateCount++;  // Track the current update cycle
 
-        
-        //store state of city before update
+        // Store previous city grid state to check for changes
         vector<vector<Cell*>> prevState = city.cityGrid;
 
-        //update the cells
+        // Update residential cells
         city.updateResidentialCells();
 
-        //print the update
-        city.PrintCity();
-
-        //check if its updated
+        // Check if city grid has changed
         updated = (prevState != city.cityGrid);
 
-
-        
+        // Output at the specified refresh rate
+        if (updateCount % refreshRate == 0) {
+            cout << "\nSimulation update " << updateCount << ":\n";
+            city.PrintCity();
+            cout << "\nPress Enter to continue to the next refresh...";
+            cin.get(); // Wait for user input
+        }
     }
 
-    cout<<"\nNo more updated avaialable. Sim complete"<<endl;
-
+    cout << "\nSimulation complete. No further updates available or time limit reached.\n";
 
     return 0;
 }

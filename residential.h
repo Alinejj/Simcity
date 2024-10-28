@@ -10,7 +10,8 @@ using namespace std;
 
 class Residential : public Cell{
     public:
-        Residential() : Cell("R"){} //default constructer
+         Residential();
+        Residential(int population); //default constructer
         void setCellPopulation(int pop) override;
         int getCellPopulation() override;
         char display() const override;
