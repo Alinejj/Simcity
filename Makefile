@@ -1,3 +1,4 @@
+
 # Makefile
 
 # Compiler
@@ -19,4 +20,4 @@ $(TARGET): $(SRC)
 clean:
 	rm -f $(TARGET)
 
-.PHONY: all clean
+.PHONY: all clean 

@@ -95,24 +95,33 @@ void City::PrintCity()
 }
 
 int City::countAdjPop(int i, int j){
-    int popCount = 0;
-
-    int rows[] = {-1, 1, 0 , 0};
-    int cols[] = {0, 0, -1, 1};
-
-    for(int k = 0; k < 4; k++){
-        int newRow = i + rows[k];
-        int newCol = j + cols[k];
-
-        //check if new pos is in bounds
-        if(newRow >= 0 && newRow < cityGrid.size() && newCol >= 0 && newCol < cityGrid[0].size()){
-            Cell* neighbor = cityGrid[newRow][newCol];
-            if(neighbor->getCellPollution() >= 1){
-                popCount++;
+    int count = 0;
+    // Add logic to count adjacent cells with population >= 1
+    for (int x = i - 1; x <= i + 1; ++x) {
+        for (int y = j - 1; y <= j + 1; ++y) {
+            if (x >= 0 && x < cityGrid.size() && y >= 0 && y < cityGrid[0].size() && !(x == i && y == j)) {
+                if (cityGrid[x][y]->getCellPopulation() >= 1) {
+                    count++;
+                }
             }
         }
     }
-    return popCount;
+    return count;
+}
+
+int City::countAdjPop(int i, int j, int minPop){
+    int count = 0;
+    // Add logic to count adjacent cells with population >= minPopulation
+    for (int x = i - 1; x <= i + 1; ++x) {
+        for (int y = j - 1; y <= j + 1; ++y) {
+            if (x >= 0 && x < cityGrid.size() && y >= 0 && y < cityGrid[0].size() && !(x == i && y == j)) {
+                if (cityGrid[x][y]->getCellPopulation() >= minPop) {
+                    count++;
+                }
+            }
+        }
+    }
+    return count;
 }
 
 bool City::isAdjPowerline(int i, int j){
