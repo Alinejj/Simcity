@@ -86,7 +86,7 @@ void City::PrintCity()
 	// Access and print the elements of the 2D vector
     for (const auto& row : cityGrid) {
         for (const auto& cell : row) {
-            cout<<cell->display()<<" ";
+            cell->printCell();
         }
         cout << endl;
     }
@@ -127,7 +127,6 @@ bool City::isAdjPowerline(int i, int j){
         //check if new pos is in bounds
         if(newRow >= 0 && newRow < cityGrid.size() && newCol >= 0 && newCol < cityGrid[0].size()){
             Cell* neighbor = cityGrid[newRow][newCol];
-
             if(neighbor->isPowerline()){
                 return true;
             }
@@ -141,9 +140,7 @@ void City::updateResidentialCells(){
         for(int j = 0; j < cityGrid[i].size(); j++){
             if(cityGrid[i][j]->getCellType() == "R"){
                 Residential* residentialCell = dynamic_cast<Residential*>(cityGrid[i][j]);
-                if (residentialCell) {
-                    residentialCell->growPopulation(*this, i, j, residentialCell);
-                }
+                residentialCell->growPopulation(*this, i, j, cityGrid[i][j]);
             }
         }
     }

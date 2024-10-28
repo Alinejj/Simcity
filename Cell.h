@@ -18,7 +18,6 @@ class Cell
 		virtual void setCellPollution(int pollution);
 		virtual string getCellType();
 		virtual void setCellType(string type);
-		virtual char display() const;
 		//Cell getAdjacentCells();
 		//void setAdjacentCells(Cell* adjacencyList);
 		void printCell();

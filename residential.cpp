@@ -23,25 +23,12 @@ int Residential::getCellPopulation() {
     return cellPopulation;
 }
 
-char Residential::display() const {
-    /*if(population == 0) return '0';
-    if(population == 1) return '1';
-    if(population == 2) return '2';
-    if(population == 3) return '3';
-    if(population == 4) return '4';
-    return 'R';*/
-
-    if (cellPopulation > 0 && cellPopulation <= 4) {
-        return '0' + cellPopulation; // Convert population number to char
-    }
-    return 'R'; 
-}
 
 void Residential::growPopulation(City& city, int i, int j, Cell* currentCell){
     int currPop = currentCell->getCellPopulation();
 
    if (currPop == 0) {
-        if (city.isAdjPowerline(i, j)) {
+	  if (city.isAdjPowerline(i, j)) {
             currentCell->setCellPopulation(1);
         } else if (city.countAdjPop(i, j) >= 1) {
             currentCell->setCellPopulation(1);

@@ -14,7 +14,6 @@ class Residential : public Cell{
         Residential(int population); //default constructer
         void setCellPopulation(int pop) override;
         int getCellPopulation() override;
-        char display() const override;
         void growPopulation(City& city, int i, int j, Cell* currentCell);
 
     private:

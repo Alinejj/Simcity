@@ -31,7 +31,9 @@ int main() {
     bool updated = true;
 
     // Main loop, runs until no updates or until time limit is reached
-    while (updated && updateCount < timeLimit) {
+    for(int i=0; i<timeLimit; i+=refreshRate){
+    //while (updated && (updateCount < timeLimit)) {
+	cout << "RefreshRate: " << refreshRate << " update: " << updated << " update count: " << updateCount << " timelimit: " << timeLimit << endl;
         updateCount++;  // Track the current update cycle
 
         // Store previous city grid state to check for changes

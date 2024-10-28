@@ -57,14 +57,6 @@ void Cell::printCell(){
 }
 
 bool Cell::isPowerline(){
-	return cellType == "P";
+	return cellType == "T";
 }
 
-char Cell::display() const{
-	if (cellType == "R" || cellType == "I" || cellType == "C") {
-        if (cellPopulation > 0 && cellPopulation <= 4) {
-            return '0' + cellPopulation;  
-        }
-    }
-    return cellType[0];
-}
