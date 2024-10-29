@@ -30,31 +30,27 @@ void Residential::growPopulation(City& city, int i, int j, Cell* currentCell){
   if (currPop == 0) {
         if (city.isAdjPowerline(i, j)) {
             currentCell->setCellPopulation(1);
-            return; // Exit after population increase to avoid multiple updates
+            return; 
         }
-        // Rule 2: If population is 0 and adjacent to at least one cell with population >= 1
         else if (city.countAdjPop(i, j) >= 1) {
             currentCell->setCellPopulation(1);
-            return; // Exit after population increase
+            return; 
         }
     }
-    // Rule 3: If population is 1 and adjacent to at least two cells with population >= 1
     else if (currPop == 1 && city.countAdjPop(i, j) >= 2) {
         currentCell->setCellPopulation(2);
-        return; // Exit after population increase
+        return; 
     }
-    // Rule 4: If population is 2 and adjacent to at least four cells with population >= 2
-    else if (currPop == 2 && city.countAdjPop(i, j, 2) >= 4) { // Add condition for checking population >= 2
+    
+    else if (currPop == 2 && city.countAdjPop(i, j, 2) >= 4) { 
         currentCell->setCellPopulation(3);
-        return; // Exit after population increase
+        return; 
     }
-    // Rule 5: If population is 3 and adjacent to at least six cells with population >= 3
-    else if (currPop == 3 && city.countAdjPop(i, j, 3) >= 6) { // Add condition for checking population >= 3
+    else if (currPop == 3 && city.countAdjPop(i, j, 3) >= 6) { 
         currentCell->setCellPopulation(4);
-        return; // Exit after population increase
+        return; 
     }
-    // Rule 6: If population is 4 and adjacent to at least eight cells with population >= 4
-    else if (currPop == 4 && city.countAdjPop(i, j, 4) >= 8) { // Add condition for checking population >= 4
-        currentCell->setCellPopulation(4); // Keeps it at max population
+    else if (currPop == 4 && city.countAdjPop(i, j, 4) >= 8) { 
+        currentCell->setCellPopulation(4); 
     }
 }

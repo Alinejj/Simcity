@@ -37,15 +37,15 @@ int main() {
         // Calculate total available workers based on population
         int totalAvailableWorkers = 0;
 
-        // Iterate through city grid to count available workers in residential cells
+        
         for (const auto& row : city.cityGrid) {
             for (const auto& cell : row) {
-                // Check if the cell is residential
+                
                 if (cell->getCellType() == "R") {
-                    // Directly access the population and calculate available workers
+                    
                     int population = cell->getCellPopulation();
-                    // For simplicity, let's assume each population unit represents one worker
-                    totalAvailableWorkers += population;  // Adjust this logic based on your worker calculation
+                   
+                    totalAvailableWorkers += population;  
                 }
             }
         }
