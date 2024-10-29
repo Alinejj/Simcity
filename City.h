@@ -23,6 +23,7 @@ class City
 		//declaring an empty 2D vector
 		vector<vector<Cell*>> cityGrid;
 
+	
 	int timeLimit;
 	int refreshRate;
 

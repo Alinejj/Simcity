@@ -15,9 +15,12 @@ class Residential : public Cell{
         void setCellPopulation(int pop) override;
         int getCellPopulation() override;
         void growPopulation(City& city, int i, int j, Cell* currentCell);
+        
 
     private:
       int population;
+       
+       
 
 };
 
