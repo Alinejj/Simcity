@@ -46,7 +46,7 @@ void Residential::growPopulation(City& city, int i, int j, Cell* currentCell){
         currentCell->setCellPopulation(3);
         return; 
     }
-    else if (currPop == 3 && city.countAdjPop(i, j, 3) >= 6) { 
+    else if (currPop == 3 && city.countAdjPop(i, j, 3) >=6) { 
         currentCell->setCellPopulation(4);
         return; 
     }

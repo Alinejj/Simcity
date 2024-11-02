@@ -34,21 +34,10 @@ int main() {
         // Update residential cells
         city.updateResidentialCells();
 
-        // Calculate total available workers based on population
-        int totalAvailableWorkers = 0;
+         // Calculate total available workers in residential areas
+        int totalAvailableWorkers = city.updateResidentialWorkers();
 
         
-        for (const auto& row : city.cityGrid) {
-            for (const auto& cell : row) {
-                
-                if (cell->getCellType() == "R") {
-                    
-                    int population = cell->getCellPopulation();
-                   
-                    totalAvailableWorkers += population;  
-                }
-            }
-        }
 
         // Output at the specified refresh rate
         if (updateCount % refreshRate == 0) {

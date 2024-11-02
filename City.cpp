@@ -155,4 +155,15 @@ void City::updateResidentialCells(){
     }
 }
 
+int City::updateResidentialWorkers() {
+    int totalWorkers = 0;
+    for (const auto& row : cityGrid) {
+        for (const auto& cell : row) {
+            if (cell && cell->getCellType() == "R") {
+                totalWorkers += cell->getCellPopulation();
+            }
+        }
+    }
+    return totalWorkers;
+}
 

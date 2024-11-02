@@ -20,6 +20,7 @@ class City
 		int countAdjPop(int i, int j);
 		int countAdjPop(int i, int j, int minPop);
 		bool isAdjPowerline(int i, int j);
+		int updateResidentialWorkers();
 		//declaring an empty 2D vector
 		vector<vector<Cell*>> cityGrid;
 
