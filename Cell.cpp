@@ -24,6 +24,10 @@ void Cell::setCellPollution(int pollution){
 void Cell::setCellType(string type){
 	cellType = type;
 }
+void Cell::incrementCellPopulation()
+{
+	cellPopulation++;
+}
 
 //CONSTRUCTORS
 Cell::Cell(){
@@ -38,25 +42,33 @@ Cell::Cell(string type){
 	cellType = type;
 }
 
+bool Cell::isPowerline()
+{
+	return cellType=="T";
+}
 //OTHER
 void Cell::printCell(){
 	if(cellPopulation == 0 && (cellType=="R" || cellType == "I" || cellType =="C"))
 	{
-		cout << cellType << " ";
+		cout << cellType << "(" << cellPollution << ")" << " ";
 	}
 	else if(cellPopulation > 0 && (cellType=="R" || cellType == "I" || cellType =="C"))
 	{
-		cout << cellPopulation << " ";
+		cout << cellPopulation << "(" << cellPollution << ")" << " ";
 	}
 	else
 	{
-		cout << cellType << " ";
+		cout << cellType << "(" << cellPollution << ")" << " ";
 	}
 
 	
 }
 
-bool Cell::isPowerline(){
-	return cellType == "T";
+bool Cell::getIsAdjacentPowerline()
+{
+	return isAdjPowerline;
 }
-
+void Cell::setIsAdjacentPowerline(bool value)
+{
+	isAdjPowerline = value;
+}

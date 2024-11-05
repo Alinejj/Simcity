@@ -14,13 +14,14 @@ class Cell
 		Cell(string type);
 		virtual int getCellPopulation();
 		virtual void setCellPopulation(int population);
+		void incrementCellPopulation();
 		virtual int getCellPollution();
 		virtual void setCellPollution(int pollution);
 		virtual string getCellType();
 		virtual void setCellType(string type);
-		//Cell getAdjacentCells();
-		//void setAdjacentCells(Cell* adjacencyList);
 		void printCell();
+		bool getIsAdjacentPowerline();
+		void setIsAdjacentPowerline(bool value);
 		bool isPowerline();
 		
 
@@ -28,7 +29,7 @@ class Cell
 		int cellPopulation;
 		int cellPollution;
 		string cellType;
-		//Cell* adjacentCells[8];
+		bool isAdjPowerline;
 		
 
 

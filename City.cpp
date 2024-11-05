@@ -6,6 +6,7 @@
 #include "Cell.h"
 #include "City.h"
 #include "residential.h"
+#include "Industrial.h"
 
 using namespace std;
 
@@ -144,17 +145,26 @@ bool City::isAdjPowerline(int i, int j){
     return false;
 }
 
+//loop through the city cells and perform needed updates
 void City::updateCells(){
+	City updatedCity;
     for(int i =0; i<cityGrid.size(); i++){
         for(int j = 0; j < cityGrid[i].size(); j++){
             if(cityGrid[i][j]->getCellType() == "R"){
                 Residential* residentialCell = dynamic_cast<Residential*>(cityGrid[i][j]);
                 residentialCell->growPopulation(*this, i, j, cityGrid[i][j]);
             }
+	    //update the industrial cells
+            if(cityGrid[i][j]->getCellType() == "I"){
+                Industrial* industrialCell = dynamic_cast<Industrial*>(cityGrid[i][j]);
+                industrialCell->updateIndustrial(*this, i, j, cityGrid[i][j]);
+            }
         }
     }
+	
 }
 
+/*COMMENTING OUT AND TRYING THE BELOW INSTEAD-MONICA
 int City::updateResidentialWorkers() {
     int totalWorkers = 0;
     for (const auto& row : cityGrid) {
@@ -166,4 +176,30 @@ int City::updateResidentialWorkers() {
     }
     return totalWorkers;
 }
+*/
+
+int City::getAvailableWorkers()
+{
+	return availableWorkers;
+}
+void City::incrementAvailableWorkers()
+{
+	availableWorkers++;
+}
+void City::decrementAvailableWorkers()
+{
+	availableWorkers--;
+}
+
+//Set into the Cell Class whether each cell is adjacent to certain other cells
+void City::setAdjecencyForCells()
+{
+    bool isAdj;
+    for(int i =0; i<cityGrid.size(); i++){
+        for(int j = 0; j < cityGrid[i].size(); j++){
+	    isAdj = isAdjPowerline(i,j);
+	    cityGrid[i][j]->setIsAdjacentPowerline(isAdj);
+        }
+    }
+} 
 

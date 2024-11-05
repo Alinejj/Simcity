@@ -11,13 +11,17 @@ using namespace std;
 
 City city;
 
+
 int main() {
     string filename;
     cout << "Enter the filename for the configuration: ";
     getline(cin, filename);
-
+    
     // Initialize city with configuration file data
     city.ReadInAndInitialize(filename);
+
+    //set all adjacency info for the cell
+    city.setAdjecencyForCells();
 
     // Access refresh rate and time limit from the city object
     int refreshRate = city.refreshRate;
@@ -35,7 +39,8 @@ int main() {
         city.updateCells();
 
          // Calculate total available workers in residential areas
-        int totalAvailableWorkers = city.updateResidentialWorkers();
+        //int totalAvailableWorkers = city.updateResidentialWorkers();
+	int totalAvailableWorkers = city.getAvailableWorkers();
 
         
 

@@ -15,6 +15,7 @@ class City
 
 	public:
 		void ReadInAndInitialize(string filename);
+		void setAdjecencyForCells(); //Set into the Cell Class whether each cell is adjacent to certain other cells
 		void PrintCity();
 		void updateCells();
 		int countAdjPop(int i, int j);
@@ -23,12 +24,17 @@ class City
 		int updateResidentialWorkers();
 		//declaring an empty 2D vector
 		vector<vector<Cell*>> cityGrid;
-
+		int getAvailableWorkers();
+		void incrementAvailableWorkers();
+		void decrementAvailableWorkers();
+		
+	
 	
 	int timeLimit;
 	int refreshRate;
 
-
+	private:
+		int availableWorkers;
 };
 
 #endif
