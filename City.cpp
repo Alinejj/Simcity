@@ -144,7 +144,7 @@ bool City::isAdjPowerline(int i, int j){
     return false;
 }
 
-void City::updateResidentialCells(){
+void City::updateCells(){
     for(int i =0; i<cityGrid.size(); i++){
         for(int j = 0; j < cityGrid[i].size(); j++){
             if(cityGrid[i][j]->getCellType() == "R"){

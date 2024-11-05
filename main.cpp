@@ -31,8 +31,8 @@ int main() {
     for (int i = 0; i < timeLimit; i += refreshRate) {
         updateCount++;  // Track the current update cycle
 
-        // Update residential cells
-        city.updateResidentialCells();
+        // Update all city cells
+        city.updateCells();
 
          // Calculate total available workers in residential areas
         int totalAvailableWorkers = city.updateResidentialWorkers();

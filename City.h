@@ -16,7 +16,7 @@ class City
 	public:
 		void ReadInAndInitialize(string filename);
 		void PrintCity();
-		void updateResidentialCells();
+		void updateCells();
 		int countAdjPop(int i, int j);
 		int countAdjPop(int i, int j, int minPop);
 		bool isAdjPowerline(int i, int j);
