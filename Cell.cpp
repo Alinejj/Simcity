@@ -44,7 +44,7 @@ Cell::Cell(string type){
 
 bool Cell::isPowerline()
 {
-	return cellType=="T";
+	return (cellType == "T" || cellType == "#");
 }
 //OTHER
 void Cell::printCell(){
