@@ -191,6 +191,21 @@ void City::decrementAvailableWorkers()
 	availableWorkers--;
 }
 
+void City::incrementAvailableGoods()
+{
+	availableGoods++;
+}
+
+void City::decrementAvailableGoods()
+{
+	availableGoods--;
+}
+
+int City::getAvailableGoods()
+{
+	return availableGoods;
+}
+
 //Set into the Cell Class whether each cell is adjacent to certain other cells
 void City::setAdjecencyForCells()
 {

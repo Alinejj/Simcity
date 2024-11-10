@@ -22,6 +22,7 @@ void Industrial::updateIndustrial(City& city, int i, int j, Cell* currentCell)
 			{
 				currentCell->incrementCellPopulation();
 				city.decrementAvailableWorkers();
+				city.incrementAvailableGoods();
 				currentCell->setCellPollution(currPop);
 				//STILL NEED ADJACENT CELLS POLLUTION
 			}
@@ -30,6 +31,7 @@ void Industrial::updateIndustrial(City& city, int i, int j, Cell* currentCell)
 			{
 				currentCell->incrementCellPopulation();
 				city.decrementAvailableWorkers();
+				city.incrementAvailableGoods();
 				currentCell->setCellPollution(currPop);
 				//STILL NEED ADJACENT CELLS POLLUTION				
 			}
@@ -40,6 +42,7 @@ void Industrial::updateIndustrial(City& city, int i, int j, Cell* currentCell)
 			{
 				currentCell->incrementCellPopulation();
 				city.decrementAvailableWorkers();
+				city.incrementAvailableGoods();
 				currentCell->setCellPollution(currPop);
 				//STILL NEED ADJACENT CELLS POLLUTION				
 			}
@@ -50,6 +53,7 @@ void Industrial::updateIndustrial(City& city, int i, int j, Cell* currentCell)
 			{
 				currentCell->incrementCellPopulation();
 				city.decrementAvailableWorkers();
+				city.incrementAvailableGoods();
 				currentCell->setCellPollution(currPop);
 				//STILL NEED ADJACENT CELLS POLLUTION				
 			}

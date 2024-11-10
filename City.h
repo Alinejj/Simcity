@@ -11,8 +11,6 @@ using namespace std;
 
 class City
 {
-	
-
 	public:
 		void ReadInAndInitialize(string filename);
 		void setAdjecencyForCells(); //Set into the Cell Class whether each cell is adjacent to certain other cells
@@ -27,7 +25,9 @@ class City
 		int getAvailableWorkers();
 		void incrementAvailableWorkers();
 		void decrementAvailableWorkers();
-		
+		void incrementAvailableGoods();
+		void decrementAvailableGoods();
+		int getAvailableGoods();
 	
 	
 	int timeLimit;
@@ -35,6 +35,7 @@ class City
 
 	private:
 		int availableWorkers;
+		int availableGoods;
 };
 
 #endif
