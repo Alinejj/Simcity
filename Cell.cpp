@@ -29,6 +29,11 @@ void Cell::incrementCellPopulation()
 	cellPopulation++;
 }
 
+void Cell::incrementCellPollution(int incrementAmt)
+{
+	cellPollution = cellPollution + incrementAmt;
+}
+
 //CONSTRUCTORS
 Cell::Cell(){
 	cellPopulation = 0;

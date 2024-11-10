@@ -28,7 +28,7 @@ class City
 		void incrementAvailableGoods();
 		void decrementAvailableGoods();
 		int getAvailableGoods();
-	
+		void spreadPollution(int x, int y, Cell* cell);
 	
 	int timeLimit;
 	int refreshRate;

@@ -24,7 +24,8 @@ void Industrial::updateIndustrial(City& city, int i, int j, Cell* currentCell)
 				city.decrementAvailableWorkers();
 				city.incrementAvailableGoods();
 				currentCell->setCellPollution(currPop);
-				//STILL NEED ADJACENT CELLS POLLUTION
+				city.spreadPollution(i,j,currentCell);
+				
 			}
 			//There is at least 1 adjacent cell with population of at least 1 and available works is >=2
 			else if (city.countAdjPop(i, j, 1)>=1 && availableWorkers>=2)
@@ -33,7 +34,8 @@ void Industrial::updateIndustrial(City& city, int i, int j, Cell* currentCell)
 				city.decrementAvailableWorkers();
 				city.incrementAvailableGoods();
 				currentCell->setCellPollution(currPop);
-				//STILL NEED ADJACENT CELLS POLLUTION				
+				city.spreadPollution(i,j,currentCell);
+								
 			}
 			break;			
 		case 1:
@@ -44,7 +46,8 @@ void Industrial::updateIndustrial(City& city, int i, int j, Cell* currentCell)
 				city.decrementAvailableWorkers();
 				city.incrementAvailableGoods();
 				currentCell->setCellPollution(currPop);
-				//STILL NEED ADJACENT CELLS POLLUTION				
+				city.spreadPollution(i,j,currentCell);
+								
 			}
 			break;
 		case 2:
@@ -55,7 +58,8 @@ void Industrial::updateIndustrial(City& city, int i, int j, Cell* currentCell)
 				city.decrementAvailableWorkers();
 				city.incrementAvailableGoods();
 				currentCell->setCellPollution(currPop);
-				//STILL NEED ADJACENT CELLS POLLUTION				
+				city.spreadPollution(i,j,currentCell);
+								
 			}
 			break;
 		default:

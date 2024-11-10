@@ -3,6 +3,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <cstdlib>
 #include "Cell.h"
 #include "City.h"
 #include "residential.h"
@@ -123,6 +124,63 @@ int City::countAdjPop(int i, int j, int minPop){
         }
     }
     return count;
+}
+
+void City::spreadPollution(int x, int y, Cell* cell)
+{
+	//pass in coordinates for the pollution spread center
+	//loop through city
+	int xDiff;
+	int yDiff;
+	int centralPollution;
+	centralPollution = cell->getCellPollution();
+	int assignPollution;
+	cout << "Central Cell is " << x << ", " << y << " Current Pollution " << centralPollution << endl;
+    	for(int i =0; i<cityGrid.size(); i++)
+	{
+        	for(int j = 0; j < cityGrid[i].size(); j++)
+		{
+			//calculate the difference from the center of pollution spread
+            		xDiff = abs(i - x);
+			yDiff = abs(j - y);
+			cout << "Checking cell: " << i << ", " << j << endl;
+			//skip the current cell as it's already been set prior
+			if(x==i && y==j)
+			{}
+			else
+			{
+				//the higher of the x and y difference is the distance from the center
+				if(xDiff > yDiff)
+				{
+					//Take the cells population minus the distance from the center to increment the pollution
+					assignPollution = centralPollution - xDiff;
+					if(assignPollution > 0)
+					{
+						cell->incrementCellPollution(assignPollution);
+					}
+				}
+				else if(yDiff > xDiff)
+				{
+					//Take the cells population minus the distance from the center to increment the pollution
+					assignPollution = centralPollution - yDiff;
+					if(assignPollution > 0)
+					{
+						cell->incrementCellPollution(assignPollution);
+					}
+				}
+				else
+				{
+					assignPollution = centralPollution - xDiff;
+					if(assignPollution > 0)
+					{
+						cell->incrementCellPollution(assignPollution);
+					}
+				}
+				cout << "assigning pollution of " << assignPollution << endl;
+			}
+        	}
+    	}
+
 }
 
 bool City::isAdjPowerline(int i, int j){

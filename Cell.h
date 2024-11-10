@@ -17,6 +17,7 @@ class Cell
 		void incrementCellPopulation();
 		virtual int getCellPollution();
 		virtual void setCellPollution(int pollution);
+		void incrementCellPollution(int incrementAmt);
 		virtual string getCellType();
 		virtual void setCellType(string type);
 		void printCell();
