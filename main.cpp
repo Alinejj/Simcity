@@ -13,9 +13,9 @@ using namespace std;
 City city;
 
 int main() {
-    City city;
-    string filename;
 
+    string filename;
+    int startRow, endRow, startCol, endCol;
     // Get the filename for the configuration
     cout << "Enter the filename for the configuration: ";
     getline(cin, filename);
@@ -37,29 +37,9 @@ int main() {
     char choice;
     cout << "Do you want to specify a range of rows and columns? (y/n): ";
     cin >> choice;
-
-    int updateCount = 0;
-
-    // Main loop, runs until the time limit is reached
-    for (int i = 0; i < timeLimit; i += refreshRate) {
-        updateCount++;  // Track the current update cycle
-
-        // Update all city cells
-        city.updateCells();
-
-        // Calculate total available workers in residential areas
-        int totalAvailableWorkers = city.getAvailableWorkers();
-        int totalAvailableGoods = city.getAvailableGoods();
-
-        // Output at the specified refresh rate
-        if (updateCount % refreshRate == 0) {
-            cout << "\nSimulation update " << updateCount << ":\n";
-            cout << "Total available workers: " << totalAvailableWorkers << endl;
-            cout << "Total available goods: " << totalAvailableGoods << endl;
-
             if (choice == 'y' || choice == 'Y') {
                 // Zoom into specific row/column if the user chooses to
-                int startRow, endRow, startCol, endCol;
+                
 
                 // Step 1: Ask the user to choose a start and end row
                 cout << "Enter the start row number (0 to " << city.cityGrid.size() - 1 << "): ";
@@ -84,26 +64,33 @@ int main() {
                     cout << "Invalid column numbers." << endl;
                     return 1;
                 }
+	}
 
+    int updateCount = 0;
+
+    // Main loop, runs until the time limit is reached
+    for (int i = 0; i < timeLimit; i += refreshRate) {
+        updateCount++;  // Track the current update cycle
+
+        // Update all city cells
+        city.updateCells();
+
+        // Calculate total available workers in residential areas
+        int totalAvailableWorkers = city.getAvailableWorkers();
+        int totalAvailableGoods = city.getAvailableGoods();
+
+        // Output at the specified refresh rate
+        if (updateCount % refreshRate == 0) {
+            cout << "\nSimulation update " << updateCount << ":\n";
+            cout << "Total available workers: " << totalAvailableWorkers << endl;
+            cout << "Total available goods: " << totalAvailableGoods << endl;
+
+            if (choice == 'y' || choice == 'Y') {
                 // Step 3: Display the selected range of cells
-                cout << "Displaying cells from row " << startRow << " to row " << endRow << " and column " << startCol << " to column " << endCol << ":" << endl;
-                for (int row = startRow; row <= endRow; row++) {
-                    for (int col = startCol; col <= endCol; col++) {
-                        // Print each cell in the selected range
-                        city.cityGrid[row][col]->printCell();
-                    }
-                    cout << endl;
-                }
+		city.PrintCityRange(startRow,endRow,startCol,endCol);
             } else {
                 // If the user does not want to select rows and columns, display the entire grid
-                cout << "Displaying the entire grid:" << endl;
-                for (int row = 0; row < city.cityGrid.size(); row++) {
-                    for (int col = 0; col < city.cityGrid[0].size(); col++) {
-                        // Print each cell in the entire grid
-                        city.cityGrid[row][col]->printCell();
-                    }
-                    cout << endl;
-                }
+		city.PrintCity();
             }
 
             cout << "\nPress Enter to continue to the next refresh...";
