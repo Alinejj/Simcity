@@ -15,7 +15,6 @@ class City
 		void ReadInAndInitialize(string filename);
 		void setAdjecencyForCells(); //Set into the Cell Class whether each cell is adjacent to certain other cells
 		void PrintCity();
-		void PrintCityRange(int startRow, int endRow, int startCol, int endCol);
 		void updateCells();
 		int countAdjPop(int i, int j);
 		int countAdjPop(int i, int j, int minPop);

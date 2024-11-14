@@ -94,18 +94,6 @@ void City::PrintCity()
     }
 }
 
-void City::PrintCityRange(int startRow, int endRow, int startCol, int endCol)
-{
-	                cout << "Displaying cells from row " << startRow << " to row " << endRow << " and column " << startCol << " to column " << endCol << ":" << endl;
-                for (int row = startRow; row <= endRow; row++) {
-                    for (int col = startCol; col <= endCol; col++) {
-                        // Print each cell in the selected range
-                        cityGrid[row][col]->printCell();
-                    }
-                    cout << endl;
-                }
-
-}
 
 int City::countAdjPop(int i, int j){
     int count = 0;

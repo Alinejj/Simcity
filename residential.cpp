@@ -31,7 +31,7 @@ void Residential::growPopulation(City& city, int i, int j, Cell* currentCell){
     int currPop = currentCell->getCellPopulation();
 
     //if my population is 0 and im adjacent to a powerline
-  if (currPop == 0 && city.isAdjPowerline(i, j)) {
+  if (currPop == 0 && city.isAdjPowerline(i, j) ) {
        //set that cell population to 1 and increment the available workers
         currentCell->setCellPopulation(1);
 	    city.incrementAvailableWorkers();
