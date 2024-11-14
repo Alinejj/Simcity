@@ -92,7 +92,18 @@ void City::PrintCity()
         }
         cout << endl;
     }
+}
 
+void City::PrintCityRange(int startRow, int endRow, int startCol, int endCol)
+{
+	                cout << "Displaying cells from row " << startRow << " to row " << endRow << " and column " << startCol << " to column " << endCol << ":" << endl;
+                for (int row = startRow; row <= endRow; row++) {
+                    for (int col = startCol; col <= endCol; col++) {
+                        // Print each cell in the selected range
+                        cityGrid[row][col]->printCell();
+                    }
+                    cout << endl;
+                }
 
 }
 
@@ -135,7 +146,7 @@ void City::spreadPollution(int x, int y, Cell* cell)
 	int centralPollution;
 	centralPollution = cell->getCellPollution();
 	int assignPollution;
-	cout << "Central Cell is " << x << ", " << y << " Current Pollution " << centralPollution << endl;
+	//cout << "Central Cell is " << x << ", " << y << " Current Pollution " << centralPollution << endl;
     	for(int i =0; i<cityGrid.size(); i++)
 	{
         	for(int j = 0; j < cityGrid[i].size(); j++)
@@ -143,7 +154,7 @@ void City::spreadPollution(int x, int y, Cell* cell)
 			//calculate the difference from the center of pollution spread
             		xDiff = abs(i - x);
 			yDiff = abs(j - y);
-			cout << "Checking cell: " << i << ", " << j << endl;
+			//cout << "Checking cell: " << i << ", " << j << endl;
 			//skip the current cell as it's already been set prior
 			if(x==i && y==j)
 			{}
@@ -176,7 +187,7 @@ void City::spreadPollution(int x, int y, Cell* cell)
 						cell->incrementCellPollution(assignPollution);
 					}
 				}
-				cout << "assigning pollution of " << assignPollution << endl;
+				//cout << "assigning pollution of " << assignPollution << endl;
 			}
         	}
     	}
