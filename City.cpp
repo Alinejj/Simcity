@@ -276,3 +276,13 @@ void City::setAdjecencyForCells()
     }
 } 
 
+void City::PrintCityRange(int startRow, int endRow, int startCol, int endCol) {
+    // Loop through the specified rows and columns to print the range
+    for (int i = startRow; i <= endRow; ++i) {
+        for (int j = startCol; j <= endCol; ++j) {
+            // Print each cell using the printCell() method from Cell class
+            cityGrid[i][j]->printCell(); 
+        }
+        cout << endl; // Move to the next row after finishing a row
+    }
+}

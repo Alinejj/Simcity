@@ -29,7 +29,7 @@ class City
 		void decrementAvailableGoods();
 		int getAvailableGoods();
 		void spreadPollution(int x, int y, Cell* cell);
-	
+		void PrintCityRange(int startRow, int endRow, int startCol, int endCol);
 	int timeLimit;
 	int refreshRate;
 
