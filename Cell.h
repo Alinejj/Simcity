@@ -12,6 +12,8 @@ class Cell
 	public:
 		Cell();
 		Cell(string type);
+		Cell(Cell& cell);
+		virtual ~Cell();
 		virtual int getCellPopulation();
 		virtual void setCellPopulation(int population);
 		void incrementCellPopulation();

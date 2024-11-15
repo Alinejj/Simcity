@@ -14,6 +14,8 @@ Residential::Residential(int population){
     this->cellType = "R";
 }
 
+Residential::~Residential(){}
+
 //sets the cellpopulation and checks that as long as the population of the cell is 0,1,2,3,4 we can assign the cellPopulation to pop
 void Residential::setCellPopulation(int pop){
     if(pop >= 0 && pop <= 4){

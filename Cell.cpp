@@ -47,6 +47,15 @@ Cell::Cell(string type){
 	cellType = type;
 }
 
+Cell::Cell(Cell& cell){
+	cellPopulation = cell.cellPopulation;
+	cellPollution = cell.cellPollution;
+	cellType = cell.cellType;
+}
+
+Cell::~Cell()
+{}
+
 bool Cell::isPowerline()
 {
 	return (cellType == "T" || cellType == "#");

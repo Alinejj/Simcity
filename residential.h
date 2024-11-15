@@ -11,6 +11,7 @@ using namespace std;
 class Residential : public Cell{
     public:
          Residential();
+	~Residential();
         Residential(int population); //default constructer
         void setCellPopulation(int pop) override;
         int getCellPopulation() override;

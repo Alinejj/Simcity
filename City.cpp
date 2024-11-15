@@ -4,6 +4,8 @@
 #include <sstream>
 #include <vector>
 #include <cstdlib>
+#include <algorithm> // for std::copy
+#include <iterator>  // for std::back_inserter
 #include "Cell.h"
 #include "City.h"
 #include "residential.h"
@@ -204,20 +206,67 @@ bool City::isAdjPowerline(int i, int j){
 
 //loop through the city cells and perform needed updates
 void City::updateCells(){
-	City updatedCity;
+    // Clear cityGridNext before deep copying
+    for (auto& row : cityGridNext) {
+        for (auto& cell : row) {
+            delete cell;  // Deallocate the memory of previous cells in cityGridNext
+        }
+    }
+    cityGridNext.clear();  // Clear the cityGridNext vector to prepare for fresh copying
+
+    // Perform a deep copy to copy the current citygrid into citygrid next
+    for (const auto& row : cityGrid) {
+        vector<Cell*> newRow;
+        for (const auto& cell : row) {
+            newRow.push_back(new Cell(*cell));//Call copy constructor
+        }
+        cityGridNext.push_back(newRow);
+    }    
+
+    //loop through the city grid next and make updates
     for(int i =0; i<cityGrid.size(); i++){
         for(int j = 0; j < cityGrid[i].size(); j++){
             if(cityGrid[i][j]->getCellType() == "R"){
-                Residential* residentialCell = dynamic_cast<Residential*>(cityGrid[i][j]);
-                residentialCell->growPopulation(*this, i, j, cityGrid[i][j]);
+                Residential* residentialCell = dynamic_cast<Residential*>(cityGridNext[i][j]);
+                residentialCell->growPopulation(*this, i, j, cityGridNext[i][j]);
             }
 	    //update the industrial cells
-            if(cityGrid[i][j]->getCellType() == "I"){
-                Industrial* industrialCell = dynamic_cast<Industrial*>(cityGrid[i][j]);
-                industrialCell->updateIndustrial(*this, i, j, cityGrid[i][j]);
+            else if(cityGrid[i][j]->getCellType() == "I"){
+		cout << "City Grid Next Cell Type: " << cityGridNext[i][j]->getCellType() << endl;
+                Industrial* industrialCell = dynamic_cast<Industrial*>(cityGridNext[i][j]);
+                if (industrialCell) {
+    			cout << "Industrial cell found at (" << i << ", " << j << ")\n";
+    			industrialCell->updateIndustrial(*this, i, j, cityGridNext[i][j]);
+		} else {
+    			cout << "Failed to cast to Industrial at (" << i << ", " << j << ")\n";
+		}
             }
         }
     }
+    //deallocate memory for the current city Grid
+    for (auto& row : cityGrid) {
+        for (auto& cell : row) {
+            delete cell;
+        }
+    }
+    cityGrid.clear();
+
+    //Perform a deep copy to copy the next grid back to the current grid
+    for (const auto& row : cityGridNext) {
+        vector<Cell*> newRow;
+        for (const auto& cell : row) {
+            newRow.push_back(new Cell(*cell));//Call copy constructor
+        }
+        cityGrid.push_back(newRow);
+    }   
+
+    //deallocate memory for the next city Grid
+    for (auto& row : cityGridNext) {
+        for (auto& cell : row) {
+            delete cell;
+        }
+    }
+    cityGridNext.clear();
 	
 }
 

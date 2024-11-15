@@ -6,9 +6,11 @@
 #include "Cell.h"
 using namespace std;
 
-class Industrial
+class Industrial: public Cell
 {
 	public:
+		Industrial();
+		~Industrial();
 		int getCityPollution();
 		void sumCityPollution();
 		void updateIndustrial(City& city, int i, int j, Cell* currentCell);

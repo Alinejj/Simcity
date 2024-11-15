@@ -4,6 +4,12 @@
 #include "Cell.h"
 using namespace std;
 
+Industrial::Industrial() : Cell("I") {  // Calls base constructor to set type
+    cellPopulation = 0;
+}
+
+Industrial::~Industrial(){}
+
 //update industrial cells according to instructions
 void Industrial::updateIndustrial(City& city, int i, int j, Cell* currentCell)
 {

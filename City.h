@@ -22,6 +22,7 @@ class City
 		int updateResidentialWorkers();
 		//declaring an empty 2D vector
 		vector<vector<Cell*>> cityGrid;
+		vector<vector<Cell*>> cityGridNext;
 		int getAvailableWorkers();
 		void incrementAvailableWorkers();
 		void decrementAvailableWorkers();
@@ -30,8 +31,8 @@ class City
 		int getAvailableGoods();
 		void spreadPollution(int x, int y, Cell* cell);
 		void PrintCityRange(int startRow, int endRow, int startCol, int endCol);
-	int timeLimit;
-	int refreshRate;
+		int timeLimit;
+		int refreshRate;
 
 	private:
 		int availableWorkers;
