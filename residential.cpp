@@ -37,6 +37,7 @@ void Residential::growPopulation(City& city, int i, int j, Cell* currentCell){
        //set that cell population to 1 and increment the available workers
         currentCell->setCellPopulation(1);
 	    city.incrementAvailableWorkers();
+        city.addTotalWorkers(1);
             return; 
         
     }
@@ -45,29 +46,33 @@ void Residential::growPopulation(City& city, int i, int j, Cell* currentCell){
         
             currentCell->setCellPopulation(1);
 	    city.incrementAvailableWorkers();
+        city.addTotalWorkers(1);
             return; 
         }
     //if my population is 1 and im adjacent to at at least 2 cells with population 1 then set the population to be 2 and increment workers
     else if (currPop == 1 && city.countAdjPop(i, j, 1) >= 2) {
         currentCell->setCellPopulation(2);
         city.incrementAvailableWorkers();
+        city.addTotalWorkers(1);
         return; 
     }
     //if my population is 2 and im adjacent to at at least 4 cells with population 2 then set the population to be 3 and increment workers
     else if (currPop == 2 && city.countAdjPop(i, j, 2) >= 4) { 
         currentCell->setCellPopulation(3);
 	city.incrementAvailableWorkers();
+    city.addTotalWorkers(1);
         return; 
     }
     //if my population is 3 and im adjacent to at at least 6 cells with population 3 then set the population to be 4 and increment workers
     else if (currPop == 3 && city.countAdjPop(i, j, 3) >=6) { 
         currentCell->setCellPopulation(4);
-	city.incrementAvailableWorkers();
+	    city.incrementAvailableWorkers();
+        city.addTotalWorkers(1);
         return; 
     }
     //if my population is 4 and im adjacent to at at least 8 cells with population 4 then set the population to be 1 and increment workers
     else if (currPop == 4 && city.countAdjPop(i, j, 4) >= 8) { 
         currentCell->setCellPopulation(4); 
-	city.incrementAvailableWorkers();
+	    city.incrementAvailableWorkers();
     }
 }

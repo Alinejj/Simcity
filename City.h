@@ -33,10 +33,21 @@ class City
 		void PrintCityRange(int startRow, int endRow, int startCol, int endCol);
 		int timeLimit;
 		int refreshRate;
+		bool isAdjacent(int i, int j, const std::string& type);
+
+
+   		void addTotalWorkers(int workers) ;
+
+    	void decrementTotalWorkers(int workers) ;
+
+    	int getTotalWorkers() const;
+
+
 
 	private:
 		int availableWorkers;
 		int availableGoods;
+		int totalWorkers;
 };
 
 #endif

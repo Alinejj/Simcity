@@ -4,8 +4,8 @@
 #include <sstream>
 #include <vector>
 #include <cstdlib>
-#include <algorithm> // for std::copy
-#include <iterator>  // for std::back_inserter
+#include <algorithm> 
+#include <iterator>  
 #include "Cell.h"
 #include "City.h"
 #include "residential.h"
@@ -184,19 +184,20 @@ void City::spreadPollution(int x, int y, Cell* cell)
 
 }
 
-bool City::isAdjPowerline(int i, int j){
-    int rows[] = {-1, 1, 0 , 0};
+bool City::isAdjPowerline(int i, int j) {
+    return isAdjacent(i, j, "T") || isAdjacent(i, j, "#");
+}
+
+bool City::isAdjacent(int i, int j, const std::string& type) {
+    int rows[] = {-1, 1, 0, 0};
     int cols[] = {0, 0, -1, 1};
 
-
-    for(int k = 0; k < 4; k++){
+    for (int k = 0; k < 4; k++) {
         int newRow = i + rows[k];
         int newCol = j + cols[k];
 
-        //check if new pos is in bounds
-        if(newRow >= 0 && newRow < cityGrid.size() && newCol >= 0 && newCol < cityGrid[0].size()){
-            Cell* neighbor = cityGrid[newRow][newCol];
-            if(neighbor->isPowerline()){
+        if (newRow >= 0 && newRow < cityGrid.size() && newCol >= 0 && newCol < cityGrid[0].size()) {
+            if (cityGrid[newRow][newCol]->getCellType() == type) {
                 return true;
             }
         }
@@ -313,24 +314,39 @@ int City::getAvailableGoods()
 }
 
 //Set into the Cell Class whether each cell is adjacent to certain other cells
-void City::setAdjecencyForCells()
-{
-    bool isAdj;
-    for(int i =0; i<cityGrid.size(); i++){
-        for(int j = 0; j < cityGrid[i].size(); j++){
-	    isAdj = isAdjPowerline(i,j);
-	    cityGrid[i][j]->setIsAdjacentPowerline(isAdj);
+void City::setAdjecencyForCells() {
+    for (int i = 0; i < cityGrid.size(); i++) {
+        for (int j = 0; j < cityGrid[i].size(); j++) {
+            cityGrid[i][j]->setIsAdjacentPowerline(isAdjPowerline(i, j));
         }
-    }
-} 
-
-void City::PrintCityRange(int startRow, int endRow, int startCol, int endCol) {
-    // Loop through the specified rows and columns to print the range
-    for (int i = startRow; i <= endRow; ++i) {
-        for (int j = startCol; j <= endCol; ++j) {
-            // Print each cell using the printCell() method from Cell class
-            cityGrid[i][j]->printCell(); 
-        }
-        cout << endl; // Move to the next row after finishing a row
     }
 }
+
+void City::PrintCityRange(int startRow, int endRow, int startCol, int endCol) {
+    if (startRow < 0 || endRow >= cityGrid.size() || startCol < 0 || endCol >= cityGrid[0].size()) {
+        cerr << "Error: Specified range is out of bounds." << endl;
+        return;
+    }
+
+    for (int i = startRow; i <= endRow; ++i) {
+        for (int j = startCol; j <= endCol; ++j) {
+            cityGrid[i][j]->printCell();
+        }
+        cout << endl;
+    }
+}
+
+
+
+
+void City::addTotalWorkers(int workers) {
+        totalWorkers += workers;
+    }
+
+void City::decrementTotalWorkers(int workers) {
+        totalWorkers -= workers;
+    }
+
+int City::getTotalWorkers() const {
+        return totalWorkers;
+    }

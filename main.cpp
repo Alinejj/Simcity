@@ -61,13 +61,16 @@ int main() {
         city.updateCells();
 
         // Calculate total available workers in residential areas
-        int totalAvailableWorkers = city.getAvailableWorkers();
+        int AvailableWorkers = city.getAvailableWorkers();
         int totalAvailableGoods = city.getAvailableGoods();
+        int totalWorker = city.getTotalWorkers();
+
 
         // Output at the specified refresh rate
         if (updateCount % refreshRate == 0) {
             cout << "\nSimulation update " << updateCount << ":\n";
-            cout << "Total available workers: " << totalAvailableWorkers << endl;
+            cout << "Total Available workers: " << AvailableWorkers << endl;
+            cout<<"Total Worker: "<<totalWorker<<endl;
             cout << "Total available goods: " << totalAvailableGoods << endl;
 
             if (choice == 'y' || choice == 'Y') {

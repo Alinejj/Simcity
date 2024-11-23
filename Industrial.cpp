@@ -10,6 +10,23 @@ Industrial::Industrial() : Cell("I") {  // Calls base constructor to set type
 
 Industrial::~Industrial(){}
 
+//constructor
+Industrial::Industrial(int population){
+    this->cellPopulation = population;
+    this->cellType = "I";
+}
+
+//sets the cellpopulation and checks that as long as the population of the cell is 0,1,2,3,4 we can assign the cellPopulation to pop
+void Industrial::setCellPopulation(int pop){
+    if(pop >= 0 && pop <= 2){
+        cellPopulation = pop;
+    }
+}
+//gets the cell population
+int Industrial::getCellPopulation() {
+    return cellPopulation;
+}
+
 //update industrial cells according to instructions
 void Industrial::updateIndustrial(City& city, int i, int j, Cell* currentCell)
 {

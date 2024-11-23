@@ -27,7 +27,6 @@ class Cell
 		void setIsAdjacentPowerline(bool value);
 		bool isPowerline();
 		
-
 	protected:
 		int cellPopulation;
 		int cellPollution;

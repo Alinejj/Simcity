@@ -26,7 +26,9 @@ void Cell::setCellType(string type){
 }
 void Cell::incrementCellPopulation()
 {
-	cellPopulation++;
+	if (cellPopulation < 3) {  
+        cellPopulation++;
+    }
 }
 
 void Cell::incrementCellPollution(int incrementAmt)
