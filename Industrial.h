@@ -10,8 +10,16 @@ using namespace std;
 class Industrial: public Cell
 {
 	public:
+		//CONSTRUCTORS
 		Industrial();
-		~Industrial();
+		~Industrial() override = default;
+		Industrial(string type);
+		Industrial(Industrial& cell);
+
+		//PRINT
+		void printCell() override;
+
+		//OTHER
 		int getCityPollution();
 		void sumCityPollution();
 		void updateIndustrial(City& city, int i, int j, Cell* currentCell);

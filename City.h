@@ -12,6 +12,11 @@ using namespace std;
 class City
 {
 	public:
+		//CONSTRUCTORS
+		City();
+		~City();
+
+		//READ IN
 		void ReadInAndInitialize(string filename);
 		void setAdjecencyForCells(); //Set into the Cell Class whether each cell is adjacent to certain other cells
 		void PrintCity();

@@ -4,17 +4,37 @@
 #include "Cell.h"
 using namespace std;
 
-Industrial::Industrial() : Cell("I") {  // Calls base constructor to set type
-    cellPopulation = 0;
+//CONSTRUCTORS
+Industrial::Industrial() : Cell(){
 }
 
-Industrial::~Industrial(){}
+Industrial::Industrial(string type) : Cell(type)
+{
+	
+}
+
+Industrial::Industrial(Industrial& cell) : Cell(cell){
+}
+
 
 //constructor
 Industrial::Industrial(int population){
     this->cellPopulation = population;
     this->cellType = "I";
 }
+
+//PRINT
+void Industrial::printCell()
+{
+	//cout << "Industrial Cell" << endl;
+	if(cellPopulation ==0){
+		cout << cellType << "(" << cellPollution << ")" << " ";
+	}
+	else if(cellPopulation > 0){
+		cout << cellPopulation << "(" << cellPollution << ")" << " ";
+	}
+}
+
 
 //sets the cellpopulation and checks that as long as the population of the cell is 0,1,2,3,4 we can assign the cellPopulation to pop
 void Industrial::setCellPopulation(int pop){
@@ -35,7 +55,7 @@ void Industrial::updateIndustrial(City& city, int i, int j, Cell* currentCell)
 
 	//get available workers
 	int availableWorkers = city.getAvailableWorkers();
-
+	
 	//decision based on cell's current population
 	switch(currPop)
 	{
@@ -86,6 +106,7 @@ void Industrial::updateIndustrial(City& city, int i, int j, Cell* currentCell)
 			}
 			break;
 		default:
+			cout << "default triggered" << endl;
 			break;
 	}
 

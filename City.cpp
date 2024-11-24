@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -14,62 +15,78 @@
 using namespace std;
 
 
+//CONSTRUCTORS
+City::City()
+{
+	availableWorkers = 0;
+	availableGoods = 0;
+	timeLimit = 0;
+	refreshRate = 0;
+}
+
+City::~City(){}
 
 //read in and initialize the city file
 
 void City::ReadInAndInitialize(string filename)
 {
-	    ifstream configFile(filename);
+	ifstream configFile(filename);
 
    
-    if (configFile.is_open())
-    {
+	if (configFile.is_open()){
+        	string region;
+        	string time;
+        	string refresh;
 
-        string region;
-        string time;
-        string refresh;
-	//Read config file
-        getline(configFile, region);
-        getline(configFile, time);
-        getline(configFile, refresh);
+		//Read config file
+        	getline(configFile, region);
+        	getline(configFile, time);
+        	getline(configFile, refresh);
 
+       		//close the config file
+		configFile.close();
+
+        	//extract the csv file name 
+        	string csvFileName = region.substr(region.find (":") + 1);
+        	timeLimit = stoi(time.substr(time.find(":") + 1));
+       		refreshRate = stoi(refresh.substr(refresh.find(":") + 1));
         
+        	//open and read the csv file
+       		ifstream csvFile(csvFileName);
+        	if(csvFile.is_open()){
+            		string line;
+            		while (getline(csvFile, line)){
+                	stringstream ss(line);
+                	string cell;
+                	vector<string> row;
 
-        configFile.close();
+                	//split the line by commas
+                	while (getline(ss, cell, ',')){
+                    		row.push_back(cell);
+                	}
 
-        //extract the csv file name 
-        string csvFileName = region.substr(region.find (":") + 1);
-        timeLimit = stoi(time.substr(time.find(":") + 1));
-        refreshRate = stoi(refresh.substr(refresh.find(":") + 1));
-        
-        
-        //open and read the csv file
-        ifstream csvFile(csvFileName);
-        if(csvFile.is_open()){
-            string line;
-            while (getline(csvFile, line)){
-                stringstream ss(line);
-                string cell;
-                vector<string> row;
+                	//process the row and add to the city vector
+			vector<Cell*>newRow;
+                	for(const string& cell : row){
+				//create a new cell node
+				if(cell == "I")
+				{
+					Industrial *indCell = new Industrial(cell);
+					newRow.push_back(indCell);					
+				}
+				else
+				{
+					Cell *newCell = new Cell(cell);
+					//push back the new cell node into the row
+					newRow.push_back(newCell);
+				}
+			
+               		}
+			//push back the new row into the city grid vector
+			cityGrid.push_back(newRow);
+           	}
 
-                //split the line by commas
-                while (getline(ss, cell, ',')){
-                    row.push_back(cell);
-                }
-
-                //process the row and add to the city vector
-		vector<Cell*>newRow;
-                for(const string& cell : row){
-			//create a new cell node
-			Cell *newCell = new Cell(cell);
-			//push back the new cell node into the row
-			newRow.push_back(newCell);
-                }
-		//push back the new row into the city grid vector
-		cityGrid.push_back(newRow);
-            }
-
-            csvFile.close();
+            	csvFile.close();
         }
 
         else{
@@ -82,7 +99,7 @@ void City::ReadInAndInitialize(string filename)
            return; 
 }
 
-}
+}//end function
 
 void City::PrintCity()
 {
@@ -216,10 +233,20 @@ void City::updateCells(){
     cityGridNext.clear();  // Clear the cityGridNext vector to prepare for fresh copying
 
     // Perform a deep copy to copy the current citygrid into citygrid next
+	//cout << "STARTING DEEP COPY" << endl << endl;
     for (const auto& row : cityGrid) {
         vector<Cell*> newRow;
         for (const auto& cell : row) {
-            newRow.push_back(new Cell(*cell));//Call copy constructor
+		//cout << "Celltype: " << cell->getCellType() << endl;
+		if(Industrial* indCell = dynamic_cast<Industrial*>(cell))
+		{
+			//cout << "trying to copy Industrial" << endl;
+			newRow.push_back(new Industrial(*indCell));//call industrial copy constructor
+		}
+		else
+		{
+			newRow.push_back(new Cell(*cell));//Call copy constructor
+		}
         }
         cityGridNext.push_back(newRow);
     }    
@@ -233,10 +260,10 @@ void City::updateCells(){
             }
 	    //update the industrial cells
             else if(cityGrid[i][j]->getCellType() == "I"){
-		cout << "City Grid Next Cell Type: " << cityGridNext[i][j]->getCellType() << endl;
+		//cout << "City Grid Next Cell Type: " << cityGridNext[i][j]->getCellType() << endl;
                 Industrial* industrialCell = dynamic_cast<Industrial*>(cityGridNext[i][j]);
                 if (industrialCell) {
-    			cout << "Industrial cell found at (" << i << ", " << j << ")\n";
+    			//cout << "Industrial cell found at (" << i << ", " << j << ")\n";
     			industrialCell->updateIndustrial(*this, i, j, cityGridNext[i][j]);
 		} else {
     			cout << "Failed to cast to Industrial at (" << i << ", " << j << ")\n";
@@ -256,7 +283,17 @@ void City::updateCells(){
     for (const auto& row : cityGridNext) {
         vector<Cell*> newRow;
         for (const auto& cell : row) {
-            newRow.push_back(new Cell(*cell));//Call copy constructor
+		//cout << "Celltype: " << cell->getCellType() << endl;
+		if(Industrial* indCell = dynamic_cast<Industrial*>(cell))
+		{
+			//cout << "trying to copy Industrial" << endl;
+			newRow.push_back(new Industrial(*indCell));//call industrial copy constructor
+		}
+		else
+		{
+			newRow.push_back(new Cell(*cell));//Call copy constructor
+		}
+
         }
         cityGrid.push_back(newRow);
     }   
@@ -317,7 +354,7 @@ int City::getAvailableGoods()
 void City::setAdjecencyForCells() {
     for (int i = 0; i < cityGrid.size(); i++) {
         for (int j = 0; j < cityGrid[i].size(); j++) {
-            cityGrid[i][j]->setIsAdjacentPowerline(isAdjPowerline(i, j));
+            cityGrid[i][j]->setIsAdjacentPowerline(isAdjacent(i, j,"T"));
         }
     }
 }

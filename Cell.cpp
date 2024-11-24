@@ -53,10 +53,9 @@ Cell::Cell(Cell& cell){
 	cellPopulation = cell.cellPopulation;
 	cellPollution = cell.cellPollution;
 	cellType = cell.cellType;
+	isAdjPowerline = cell.isAdjPowerline;
 }
 
-Cell::~Cell()
-{}
 
 bool Cell::isPowerline()
 {
@@ -64,6 +63,7 @@ bool Cell::isPowerline()
 }
 //OTHER
 void Cell::printCell(){
+	//cout << "Base Cell" << endl;
 	if(cellPopulation == 0 && (cellType=="R" || cellType == "I" || cellType =="C"))
 	{
 		cout << cellType << "(" << cellPollution << ")" << " ";
