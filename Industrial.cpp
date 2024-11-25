@@ -28,10 +28,10 @@ void Industrial::printCell()
 {
 	//cout << "Industrial Cell" << endl;
 	if(cellPopulation ==0){
-		cout << cellType << "(" << cellPollution << ")" << " ";
+		cout << "\t" << cellType << "(" << cellPollution << ")";
 	}
 	else if(cellPopulation > 0){
-		cout << cellPopulation << "(" << cellPollution << ")" << " ";
+		cout << "\t" << cellPopulation << "(" << cellPollution << ")";
 	}
 }
 
@@ -48,10 +48,10 @@ int Industrial::getCellPopulation() {
 }
 
 //update industrial cells according to instructions
-void Industrial::updateIndustrial(City& city, int i, int j, Cell* currentCell)
+void Industrial::updateIndustrial(City& city, int i, int j, Cell* currentCell, Cell* refCell)
 {
 	//get cells current population
-	int currPop = currentCell->getCellPopulation();
+	int currPop = refCell->getCellPopulation();
 
 	//get available workers
 	int availableWorkers = city.getAvailableWorkers();
@@ -61,13 +61,14 @@ void Industrial::updateIndustrial(City& city, int i, int j, Cell* currentCell)
 	{
 		case 0:
 			//The cell is adjacent to a power line and available workers is >=2
-			if(currentCell->getIsAdjacentPowerline()==true && availableWorkers >= 2)
+			if(refCell->getIsAdjacentPowerline()==true && availableWorkers >= 2)
 			{
 				currentCell->incrementCellPopulation();
 				city.decrementAvailableWorkers();
 				city.incrementAvailableGoods();
-				currentCell->setCellPollution(currPop);
-				city.spreadPollution(i,j,currentCell);
+				//currentCell->setCellPollution(currPop);
+				//cout << "Setting cell " << i << "," << j << " pollution to " << currPop << endl;
+				//city.spreadPollution(i,j,currentCell,city);
 				
 			}
 			//There is at least 1 adjacent cell with population of at least 1 and available works is >=2
@@ -76,8 +77,9 @@ void Industrial::updateIndustrial(City& city, int i, int j, Cell* currentCell)
 				currentCell->incrementCellPopulation();
 				city.decrementAvailableWorkers();
 				city.incrementAvailableGoods();
-				currentCell->setCellPollution(currPop);
-				city.spreadPollution(i,j,currentCell);
+				//currentCell->setCellPollution(currPop);
+				//cout << "Setting cell " << i << "," << j << " pollution to " << currPop << endl;
+				//city.spreadPollution(i,j,currentCell,city);
 								
 			}
 			break;			
@@ -88,8 +90,9 @@ void Industrial::updateIndustrial(City& city, int i, int j, Cell* currentCell)
 				currentCell->incrementCellPopulation();
 				city.decrementAvailableWorkers();
 				city.incrementAvailableGoods();
-				currentCell->setCellPollution(currPop);
-				city.spreadPollution(i,j,currentCell);
+				//currentCell->setCellPollution(currPop);
+				//cout << "Setting cell " << i << "," << j << " pollution to " << currPop << endl;
+				//city.spreadPollution(i,j,currentCell,city);
 								
 			}
 			break;
@@ -100,14 +103,31 @@ void Industrial::updateIndustrial(City& city, int i, int j, Cell* currentCell)
 				currentCell->incrementCellPopulation();
 				city.decrementAvailableWorkers();
 				city.incrementAvailableGoods();
-				currentCell->setCellPollution(currPop);
-				city.spreadPollution(i,j,currentCell);
+				//currentCell->setCellPollution(currPop);
+				//cout << "Setting cell " << i << "," << j << " pollution to " << currPop << endl;
+				//city.spreadPollution(i,j,currentCell,city);
 								
 			}
 			break;
 		default:
-			cout << "default triggered" << endl;
+			//cout << "default triggered" << endl;
 			break;
+	}
+	//set the current cell's pollution to it's current population
+	if(refCell->getCellPollution()< currPop)
+	{		
+		currentCell->setCellPollution(currPop);
+		
+	}
+
+	//if the current cell's pollution is greater than 1 then to the spread pollution calculations
+	if(refCell->getCellPollution()>1)
+	{
+		//cout << "triggering spread pollution - Industrial Class" << endl;
+ 		//city.PrintCity();
+		city.spreadPollution(i,j,currentCell,city,refCell);
+		//cout << "Completing spread pollution - Industrial Class" << endl;
+		//city.PrintCity();
 	}
 
 }

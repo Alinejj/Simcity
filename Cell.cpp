@@ -66,17 +66,16 @@ void Cell::printCell(){
 	//cout << "Base Cell" << endl;
 	if(cellPopulation == 0 && (cellType=="R" || cellType == "I" || cellType =="C"))
 	{
-		cout << cellType << "(" << cellPollution << ")" << " ";
+		cout << "\t" << cellType << "(" << cellPollution << ")";
 	}
 	else if(cellPopulation > 0 && (cellType=="R" || cellType == "I" || cellType =="C"))
 	{
-		cout << cellPopulation << "(" << cellPollution << ")" << " ";
+		cout << "\t" << cellPopulation << "(" << cellPollution << ")";
 	}
 	else
 	{
-		cout << cellType << "(" << cellPollution << ")" << " ";
+		cout << "\t" << cellType << "(" << cellPollution << ")";
 	}
-
 	
 }
 

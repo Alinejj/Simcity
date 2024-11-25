@@ -22,8 +22,7 @@ class Industrial: public Cell
 		//OTHER
 		int getCityPollution();
 		void sumCityPollution();
-		void updateIndustrial(City& city, int i, int j, Cell* currentCell);
-		void setCellPopulation(int pop) override;
+		void updateIndustrial(City& city, int i, int j, Cell* currentCell,Cell* refCell);		void setCellPopulation(int pop) override;
         int getCellPopulation() override;
 		Industrial(int population);
 

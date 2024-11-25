@@ -144,24 +144,43 @@ int City::countAdjPop(int i, int j, int minPop){
     return count;
 }
 
-void City::spreadPollution(int x, int y, Cell* cell)
+void City::spreadPollution(int x, int y, Cell* cell, City& city, Cell* refCell)
 {
+/*-DISABLING DEBUG CODE
+	//Cell being passed in by reference is the one we are updating
+    cout << "BEFORE Pollution Spread: - City Grid" << endl;
+    for (const auto& row : cityGrid) {
+        for (const auto& cell : row) {
+            cell->printCell();
+        }
+        cout << endl;
+    }
+
+	    // Before modifications
+    cout << "BEFORE Pollution Spread: - City Grid Next" << endl;
+    for (const auto& row : cityGridNext) {
+        for (const auto& cell : row) {
+            cell->printCell();
+        }
+        cout << endl;
+    }
+*/
+
 	//pass in coordinates for the pollution spread center
 	//loop through city
 	int xDiff;
 	int yDiff;
-	int centralPollution;
-	centralPollution = cell->getCellPollution();
+	int pollutionToSpread;
+	pollutionToSpread= refCell->getCellPopulation();
 	int assignPollution;
-	//cout << "Central Cell is " << x << ", " << y << " Current Pollution " << centralPollution << endl;
-    	for(int i =0; i<cityGrid.size(); i++)
+	//cout << "Central Cell is " << x << ", " << y << " Pollution to Spread " << pollutionToSpread<< endl;
+    	for(int i =0; i<cityGridNext.size(); i++)
 	{
-        	for(int j = 0; j < cityGrid[i].size(); j++)
+        	for(int j = 0; j < cityGridNext[i].size(); j++)
 		{
 			//calculate the difference from the center of pollution spread
             		xDiff = abs(i - x);
 			yDiff = abs(j - y);
-			//cout << "Checking cell: " << i << ", " << j << endl;
 			//skip the current cell as it's already been set prior
 			if(x==i && y==j)
 			{}
@@ -171,34 +190,54 @@ void City::spreadPollution(int x, int y, Cell* cell)
 				if(xDiff > yDiff)
 				{
 					//Take the cells population minus the distance from the center to increment the pollution
-					assignPollution = centralPollution - xDiff;
+					assignPollution = pollutionToSpread- xDiff;
 					if(assignPollution > 0)
 					{
-						cell->incrementCellPollution(assignPollution);
+						
+						//cout << "Assigning pollution of " << assignPollution << " to cell " << i << "," << j << endl;
+						//cout << "Current pollution: " << cityGridNext[i][j]->getCellPollution() << endl;
+						cityGridNext[i][j]->incrementCellPollution(assignPollution);
+						//cout << "New pollution: " << cityGridNext[i][j]->getCellPollution() << endl;
 					}
 				}
 				else if(yDiff > xDiff)
 				{
 					//Take the cells population minus the distance from the center to increment the pollution
-					assignPollution = centralPollution - yDiff;
+					assignPollution = pollutionToSpread- yDiff;
 					if(assignPollution > 0)
 					{
-						cell->incrementCellPollution(assignPollution);
+						//cout << "Assigning pollution of " << assignPollution << " to cell " << i << "," << j << endl;
+						//cout << "Current pollution: " << cityGridNext[i][j]->getCellPollution() << endl;
+						cityGridNext[i][j]->incrementCellPollution(assignPollution);
+						//cout << "New pollution: " << cityGridNext[i][j]->getCellPollution() << endl;
 					}
 				}
 				else
 				{
-					assignPollution = centralPollution - xDiff;
+					assignPollution = pollutionToSpread- xDiff;
 					if(assignPollution > 0)
 					{
-						cell->incrementCellPollution(assignPollution);
+						//cout << "Assigning pollution of " << assignPollution << " to cell " << i << "," << j << endl;
+						//cout << "Current pollution: " << cityGridNext[i][j]->getCellPollution() << endl;
+						cityGridNext[i][j]->incrementCellPollution(assignPollution);
+						//cout << "New pollution: " << cityGridNext[i][j]->getCellPollution() << endl;
 					}
 				}
-				//cout << "assigning pollution of " << assignPollution << endl;
+				
 			}
         	}
     	}
 
+/*-DISABLING DEBUG CODE
+	    // after modifications
+    cout << "AFTER Pollution Spread:" << endl;
+    for (const auto& row : cityGridNext) {
+        for (const auto& cell : row) {
+            cell->printCell();
+        }
+        cout << endl;
+    }
+*/
 }
 
 bool City::isAdjPowerline(int i, int j) {
@@ -264,7 +303,7 @@ void City::updateCells(){
                 Industrial* industrialCell = dynamic_cast<Industrial*>(cityGridNext[i][j]);
                 if (industrialCell) {
     			//cout << "Industrial cell found at (" << i << ", " << j << ")\n";
-    			industrialCell->updateIndustrial(*this, i, j, cityGridNext[i][j]);
+    			industrialCell->updateIndustrial(*this, i, j, cityGridNext[i][j],cityGrid[i][j]);
 		} else {
     			cout << "Failed to cast to Industrial at (" << i << ", " << j << ")\n";
 		}
