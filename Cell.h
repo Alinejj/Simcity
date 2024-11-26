@@ -10,8 +10,14 @@ using namespace std;
 class Cell
 {
 	public:
+		//CONSTRUCTORS
+		//CONSTRUCTORS
 		Cell();
 		Cell(string type);
+		Cell(Cell& cell);
+		virtual ~Cell() = default;
+
+		//GETTERS AND SETTERS
 		virtual int getCellPopulation();
 		virtual void setCellPopulation(int population);
 		void incrementCellPopulation();
@@ -20,12 +26,14 @@ class Cell
 		void incrementCellPollution(int incrementAmt);
 		virtual string getCellType();
 		virtual void setCellType(string type);
-		void printCell();
+
+		//PRINT
+		virtual void printCell();
+
 		bool getIsAdjacentPowerline();
 		void setIsAdjacentPowerline(bool value);
 		bool isPowerline();
 		
-
 	protected:
 		int cellPopulation;
 		int cellPollution;

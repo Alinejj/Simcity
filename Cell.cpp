@@ -26,7 +26,9 @@ void Cell::setCellType(string type){
 }
 void Cell::incrementCellPopulation()
 {
-	cellPopulation++;
+	if (cellPopulation < 3) {  
+        cellPopulation++;
+    }
 }
 
 void Cell::incrementCellPollution(int incrementAmt)
@@ -47,25 +49,33 @@ Cell::Cell(string type){
 	cellType = type;
 }
 
+Cell::Cell(Cell& cell){
+	cellPopulation = cell.cellPopulation;
+	cellPollution = cell.cellPollution;
+	cellType = cell.cellType;
+	isAdjPowerline = cell.isAdjPowerline;
+}
+
+
 bool Cell::isPowerline()
 {
 	return (cellType == "T" || cellType == "#");
 }
 //OTHER
 void Cell::printCell(){
+	//cout << "Base Cell" << endl;
 	if(cellPopulation == 0 && (cellType=="R" || cellType == "I" || cellType =="C"))
 	{
-		cout << cellType << "(" << cellPollution << ")" << " ";
+		cout << "\t" << cellType << "(" << cellPollution << ")";
 	}
 	else if(cellPopulation > 0 && (cellType=="R" || cellType == "I" || cellType =="C"))
 	{
-		cout << cellPopulation << "(" << cellPollution << ")" << " ";
+		cout << "\t" << cellPopulation << "(" << cellPollution << ")";
 	}
 	else
 	{
-		cout << cellType << "(" << cellPollution << ")" << " ";
+		cout << "\t" << cellType << "(" << cellPollution << ")";
 	}
-
 	
 }
 
