@@ -23,6 +23,7 @@ City::City()
 	availableGoods = 0;
 	timeLimit = 0;
 	refreshRate = 0;
+	totalPollution = 0;
 }
 
 City::~City(){}
@@ -434,3 +435,20 @@ void City::decrementTotalWorkers(int workers) {
 int City::getTotalWorkers() const {
         return totalWorkers;
     }
+
+void City::calcAndSetTotalPollution()
+{
+	int sum;
+	sum = 0;
+	for (auto& row : cityGrid) {
+        	for (auto& cell : row) {
+            		sum = sum + cell->getCellPollution();
+        	}
+   	}
+	totalPollution = sum;
+}
+
+int City::getTotalPollution()
+{
+	return totalPollution;
+}

@@ -43,6 +43,8 @@ class City
 		void addTotalWorkers(int workers) ;
 		void decrementTotalWorkers(int workers) ;
 		int getTotalWorkers() const;
+		int getTotalPollution();
+		void calcAndSetTotalPollution();
 				
 		//VECTORS AND VARIABLES
 		vector<vector<Cell*>> cityGrid;
@@ -54,6 +56,7 @@ class City
 		int availableWorkers;
 		int availableGoods;
 		int totalWorkers;
+		int totalPollution;
 };
 
 #endif

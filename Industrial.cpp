@@ -47,6 +47,7 @@ int Industrial::getCellPopulation() {
     return cellPopulation;
 }
 
+
 //update industrial cells according to instructions
 void Industrial::updateIndustrial(City& city, int i, int j, Cell* currentCell, Cell* refCell)
 {

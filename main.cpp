@@ -64,6 +64,8 @@ int main() {
         int AvailableWorkers = city.getAvailableWorkers();
         int totalAvailableGoods = city.getAvailableGoods();
         int totalWorker = city.getTotalWorkers();
+	city.calcAndSetTotalPollution();
+	int totalPollution = city.getTotalPollution();
 
 
         // Output at the specified refresh rate
@@ -72,6 +74,7 @@ int main() {
             cout << "Total Available workers: " << AvailableWorkers << endl;
             cout<<"Total Worker: "<<totalWorker<<endl;
             cout << "Total available goods: " << totalAvailableGoods << endl;
+	    cout << "Total Pollution: " << totalPollution << endl;
 
             if (choice == 'y' || choice == 'Y') {
                 // Display from the startRow to the end of the map
