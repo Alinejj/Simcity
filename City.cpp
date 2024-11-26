@@ -245,7 +245,7 @@ bool City::isAdjPowerline(int i, int j) {
     return isAdjacent(i, j, "T") || isAdjacent(i, j, "#");
 }
 
-bool City::isAdjacent(int i, int j, const std::string& type) {
+bool City::isAdjacent(int i, int j, const string& type) {
     int rows[] = {-1, 1, 0, 0};
     int cols[] = {0, 0, -1, 1};
 
@@ -261,6 +261,7 @@ bool City::isAdjacent(int i, int j, const std::string& type) {
     }
     return false;
 }
+
 
 //loop through the city cells and perform needed updates
 void City::updateCells(){
