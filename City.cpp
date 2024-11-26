@@ -133,7 +133,6 @@ int City::countAdjPop(int i, int j){
 
 int City::countAdjPop(int i, int j, int minPop){
     int count = 0;
-    // Add logic to count adjacent cells with population >= minPopulation
     for (int x = i - 1; x <= i + 1; ++x) {
         for (int y = j - 1; y <= j + 1; ++y) {
             if (x >= 0 && x < cityGrid.size() && y >= 0 && y < cityGrid[0].size() && !(x == i && y == j)) {

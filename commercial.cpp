@@ -1,7 +1,8 @@
 #include <iostream>
-#include "commercial.h"
 #include "Cell.h"
 #include "City.h"
+#include "commercial.h"
+
 
 using namespace std;
 
