@@ -8,6 +8,7 @@
 #include "City.h"
 #include "residential.h"
 #include "Industrial.h"
+#include "commercial.h"
 
 using namespace std;
 
@@ -227,6 +228,13 @@ void City::updateCells(){
             if(cityGrid[i][j]->getCellType() == "I"){
                 Industrial* industrialCell = dynamic_cast<Industrial*>(cityGrid[i][j]);
                 industrialCell->updateIndustrial(*this, i, j, cityGrid[i][j]);
+            }
+
+            if(cityGrid[i][j]->getCellType() == "C"){
+                Commercial* commercialCell = dynamic_cast<Commercial*>(cityGrid[i][j]);
+                commercialCell->updateCommercial(*this, i, j, cityGrid[i][j]);
+
+
             }
         }
     }

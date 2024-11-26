@@ -5,7 +5,7 @@
 CXX = g++
 
 # Source files
-SRC = main.cpp Cell.cpp City.cpp residential.cpp Industrial.cpp
+SRC = main.cpp Cell.cpp City.cpp residential.cpp Industrial.cpp commercial.cpp
 
 # Output binary
 TARGET = main
