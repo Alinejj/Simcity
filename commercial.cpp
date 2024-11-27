@@ -29,7 +29,7 @@ void Commercial::updateCommercial(City& city, int i, int j, Cell* currentCell) {
 
     // If this cell has no population
     if (currentPopulation == 0) {
-        if (currentCell->getIsAdjacentPowerline() && workers >= 1 && goods >= 1) {
+        if (currentCell->getIsAdjacentPowerline()==true && workers >= 1 && goods >= 1) {
             applyGrowth(currentCell, city, i, j, workers, goods);
         } 
         // Or it can grow if it’s next to at least one populated cell, and resources are available
