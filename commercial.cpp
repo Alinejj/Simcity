@@ -24,7 +24,7 @@ void Commercial::updateCommercial(City& city, int i, int j, Cell* currentCell) {
     int goods = city.getAvailableGoods();
 
     if (currentPopulation == 0) {
-        if (currentCell->getIsAdjacentPowerline() && workers >= 1 && goods >= 1) {
+        if (currentCell->getIsAdjacentPowerline()==true && workers >= 1 && goods >= 1) {
             applyGrowth(currentCell, city, i, j, workers, goods);
         } else if (city.countAdjPop(i, j, 1) >= 1 && workers >= 1 && goods >= 1) {
             applyGrowth(currentCell, city, i, j, workers, goods);

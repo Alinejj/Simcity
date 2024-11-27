@@ -39,7 +39,7 @@ class City
 		void incrementAvailableGoods();
 		void decrementAvailableGoods();
 		int getAvailableGoods();
-		bool isAdjacent(int i, int j, const std::string& type);
+		bool isAdjacent(int i, int j, const string& type);
 		void addTotalWorkers(int workers) ;
 		void decrementTotalWorkers(int workers) ;
 		int getTotalWorkers() const;

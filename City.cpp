@@ -265,15 +265,15 @@ bool City::isAdjacent(int i, int j, const string& type) {
 
 //loop through the city cells and perform needed updates
 void City::updateCells(){
-    // Clear cityGridNext before deep copying
+    
     for (auto& row : cityGridNext) {
         for (auto& cell : row) {
-            delete cell;  // Deallocate the memory of previous cells in cityGridNext
+            delete cell;  
         }
     }
-    cityGridNext.clear();  // Clear the cityGridNext vector to prepare for fresh copying
+    cityGridNext.clear();  
 
-    // Perform a deep copy to copy the current citygrid into citygrid next
+    // deep copy the current citygrid into citygrid next
 	//cout << "STARTING DEEP COPY" << endl << endl;
     for (const auto& row : cityGrid) {
         vector<Cell*> newRow;
@@ -286,7 +286,7 @@ void City::updateCells(){
 		}
 		else
 		{
-			newRow.push_back(new Cell(*cell));//Call copy constructor
+			newRow.push_back(new Cell(*cell));
 		}
         }
         cityGridNext.push_back(newRow);
@@ -300,7 +300,7 @@ void City::updateCells(){
                 residentialCell->growPopulation(*this, i, j, cityGridNext[i][j]);
             }
 	    //update the industrial cells
-            else if(cityGrid[i][j]->getCellType() == "I"){
+             if(cityGrid[i][j]->getCellType() == "I"){
 		//cout << "City Grid Next Cell Type: " << cityGridNext[i][j]->getCellType() << endl;
                 Industrial* industrialCell = dynamic_cast<Industrial*>(cityGridNext[i][j]);
                 if (industrialCell) {
@@ -312,8 +312,8 @@ void City::updateCells(){
             }
 
             if(cityGrid[i][j]->getCellType() == "C"){
-                Commercial* commercialCell = dynamic_cast<Commercial*>(cityGrid[i][j]);
-                commercialCell->updateCommercial(*this, i, j, cityGrid[i][j]);
+                Commercial* commercialCell = dynamic_cast<Commercial*>(cityGridNext[i][j]);
+                commercialCell->updateCommercial(*this, i, j, cityGridNext[i][j]);
 
 
             }
@@ -327,7 +327,7 @@ void City::updateCells(){
     }
     cityGrid.clear();
 
-    //Perform a deep copy to copy the next grid back to the current grid
+    // deep copy the next grid back to the current grid
     for (const auto& row : cityGridNext) {
         vector<Cell*> newRow;
         for (const auto& cell : row) {
@@ -336,6 +336,11 @@ void City::updateCells(){
 		{
 			//cout << "trying to copy Industrial" << endl;
 			newRow.push_back(new Industrial(*indCell));//call industrial copy constructor
+		}
+		else if(Commercial* indCell = dynamic_cast<Commercial*>(cell))
+		{
+			//cout << "trying to copy Industrial" << endl;
+			newRow.push_back(new Commercial(*indCell));//call industrial copy constructor
 		}
 		else
 		{
@@ -398,7 +403,7 @@ int City::getAvailableGoods()
 	return availableGoods;
 }
 
-//Set into the Cell Class whether each cell is adjacent to certain other cells
+//set into the Cell Class whether each cell is adjacent to certain other cells
 void City::setAdjecencyForCells() {
     for (int i = 0; i < cityGrid.size(); i++) {
         for (int j = 0; j < cityGrid[i].size(); j++) {
