@@ -332,7 +332,10 @@ void City::updateCells(){
         vector<Cell*> newRow;
         for (const auto& cell : row) {
 		//cout << "Celltype: " << cell->getCellType() << endl;
-		if(Industrial* indCell = dynamic_cast<Industrial*>(cell))
+		if(Residential *indCell = dynamic_cast<Residential*>(cell)){
+			newRow.push_back(new Residential(*indCell));
+		}
+		else if(Industrial* indCell = dynamic_cast<Industrial*>(cell))
 		{
 			//cout << "trying to copy Industrial" << endl;
 			newRow.push_back(new Industrial(*indCell));//call industrial copy constructor
