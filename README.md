@@ -34,7 +34,7 @@ make
 ```
 Or use the following command: 
 ```bash
-g++ -o main main.cpp residential.cpp industrial.cpp commercial.cpp city.cpp cell.cpp
+g++ -o main main.cpp residential.cpp Industrial.cpp commercial.cpp City.cpp Cell.cpp
 ```
 
 # Running
