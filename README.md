@@ -14,6 +14,7 @@ Refresh Rate:1
 ```
 
 - region1.csv should provide the layout for the city grid in this format
+```bash
 , ,T,#,T,T,T, 
 I,I,I,-,C,C,T, 
 I,I,I,-,C,C,T,P
@@ -22,6 +23,7 @@ I,I,I,-,C,C,T,
  , ,-,R,R,R,T, 
  , ,-,R,R,R, , 
  , ,-,R,R,R, , 
+```
 
 - Other program files (.cpp and .h files included with the zip file and a makefile)
 
