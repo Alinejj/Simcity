@@ -32,6 +32,10 @@ Compile using the makefile as follows
 ```bash
 make
 ```
+Or use the following command: 
+```bash
+g++ -o main main.cpp residential.cpp industrial.cpp commercial.cpp city.cpp cell.cpp
+```
 
 # Running
 Run after compiling using the following command
