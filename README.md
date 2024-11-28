@@ -1,3 +1,27 @@
 # SimCity
 
-In this config.cpp we are just taking the file name first. We prompt the user for the file name and then extract the csv file and open and read it. If we could not open it, then we say that we coulnd't open it. If it was unreadable, we say it was not able to read and error.
+**Description**
+This project simulates how pollution spreads across a city with 3 zones (Industrial, Residential, and Commercial).
+
+**Prerequisites**
+There are 2 files needed to run the program and they should be placed in the main program folder
+
+- Config.txt should provide the following inputs in this format
+Region Layout:region1.csv
+Time Limit:20
+Refresh Rate:1
+
+
+- region1.csv should provide the layout for the city grid in this format
+, ,T,#,T,T,T, 
+I,I,I,-,C,C,T, 
+I,I,I,-,C,C,T,P
+I,I,I,-,C,C,T, 
+-,-,-,-,-,-,#,-
+ , ,-,R,R,R,T, 
+ , ,-,R,R,R, , 
+ , ,-,R,R,R, , 
+
+- Other program files (.cpp and .h files included with the zip file and a makefile)
+
+
