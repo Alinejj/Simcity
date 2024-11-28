@@ -118,6 +118,28 @@ void City::PrintCity()
 
 int City::countAdjPop(int i, int j){
     int count = 0;
+    int xDiff; //difference from i-x coordinates
+    int yDiff; //difference from j-y coordinates
+    for(int x =0; x<cityGrid.size(); x++)
+    {
+        for(int y = 0; y < cityGrid[i].size(); y++)
+	{
+		//calculate the difference from the center of pollution spread
+            	xDiff = abs(x-i);
+		yDiff = abs(y-j);
+		//skip the current cell as it's already been set prior
+		if(x==i && y==j){}
+		else
+		{
+			if(xDiff <=1 && yDiff <= 1 && cityGrid[x][y]->getCellPopulation() >= 1)
+			{
+				count++;
+			}
+		}
+	}
+    }
+
+/*
     // Add logic to count adjacent cells with population >= 1
     for (int x = i - 1; x <= i + 1; ++x) {
         for (int y = j - 1; y <= j + 1; ++y) {
@@ -128,11 +150,34 @@ int City::countAdjPop(int i, int j){
             }
         }
     }
+*/
     return count;
 }
 
 int City::countAdjPop(int i, int j, int minPop){
     int count = 0;
+    int xDiff; //difference from i-x coordinates
+    int yDiff; //difference from j-y coordinates
+    for(int x =0; x<cityGrid.size(); x++)
+    {
+        for(int y = 0; y < cityGrid[i].size(); y++)
+	{
+		//calculate the difference from the center of pollution spread
+            	xDiff = abs(x-i);
+		yDiff = abs(y-j);
+		//skip the current cell as it's already been set prior
+		if(x==i && y==j){}
+		else
+		{
+			if(xDiff <=1 && yDiff <= 1 && cityGrid[x][y]->getCellPopulation() >= minPop)
+			{
+				count++;
+			}
+		}
+	}
+    }
+
+/*
     for (int x = i - 1; x <= i + 1; ++x) {
         for (int y = j - 1; y <= j + 1; ++y) {
             if (x >= 0 && x < cityGrid.size() && y >= 0 && y < cityGrid[0].size() && !(x == i && y == j)) {
@@ -142,6 +187,7 @@ int City::countAdjPop(int i, int j, int minPop){
             }
         }
     }
+*/
     return count;
 }
 
@@ -246,6 +292,28 @@ bool City::isAdjPowerline(int i, int j) {
 }
 
 bool City::isAdjacent(int i, int j, const string& type) {
+    int xDiff; //difference from i-x coordinates
+    int yDiff; //difference from j-y coordinates
+    for(int x =0; x<cityGrid.size(); x++)
+    {
+        for(int y = 0; y < cityGrid[i].size(); y++)
+	{
+		//calculate the difference from the center of pollution spread
+            	xDiff = abs(x-i);
+		yDiff = abs(y-j);
+		//skip the current cell as it's already been set prior
+		if(x==i && y==j){}
+		else
+		{
+			if(xDiff <=1 && yDiff <= 1 && cityGrid[x][y]->getCellType() == type)
+			{
+				return true;
+			}
+		}
+	}
+    }
+
+/*
     int rows[] = {-1, 1, 0, 0};
     int cols[] = {0, 0, -1, 1};
 
@@ -259,6 +327,7 @@ bool City::isAdjacent(int i, int j, const string& type) {
             }
         }
     }
+*/
     return false;
 }
 
