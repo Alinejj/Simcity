@@ -49,7 +49,7 @@ void Commercial::updateCommercial(City& city, int i, int j, Cell* currentCell) {
 
 // handles what happens when a cell grows it increases population and decreases city resources
 void Commercial::applyGrowth(Cell* currentCell, City& city, int i, int j, int& availableWorkers, int& availableGoods) {
-    currentCell->incrementCellPopulation();  // Add one person to this cell
-    city.decrementAvailableWorkers();        // Use up one worker from the city
-    city.decrementAvailableGoods();          // Use up one unit of goods from the city
+    currentCell->incrementCellPopulation();  // adds one person to this cell
+    city.decrementAvailableWorkers();        // uses up one worker from the city
+    city.decrementAvailableGoods();          // uses up one unit of goods from the city
 }
