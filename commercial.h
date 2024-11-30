@@ -13,21 +13,21 @@ public:
     Commercial();
     Commercial(int population);
 
-    // Decides whether this commercial cell should grow
+    // decides whether the commercial cell should grow
     void updateCommercial(City& city, int i, int j, Cell* currentCell);
 
     
-    // Handles the actual process of growing the cell: increases population and adjusts city resources
+    // hanldes the actual process of growing the cell
     void applyGrowth(Cell* currentCell, City& city, int i, int j, int& availableWorkers, int& availableGoods); 
      
-    // Sets the population of this cell (overrides the base class method)
+    // sets the population of the cell
     void setCellPopulation(int pop) override;
 
-    // Gets the current population of this cell (overrides the base class method)
+    // gets the current population of this cell 
     int getCellPopulation() override;
 
 private:
-    int cellPopulation;  // Declare this if it doesn't exist in Cell
+    int cellPopulation;  
 };
 
 #endif
